@@ -10,7 +10,7 @@ import {
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://followdegree.herokuapp.com/";
 
 const ProtectedRoute = () => {
   const isAuth = localStorage.getItem("access");
