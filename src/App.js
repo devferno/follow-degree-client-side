@@ -13,7 +13,8 @@ import axios from "axios";
 axios.defaults.baseURL = "https://followdegree.herokuapp.com/";
 
 const ProtectedRoute = () => {
-  const isAuth = localStorage.getItem("access");
+  const isAuth =
+    localStorage.getItem("access") || localStorage.getItem("access-admin");
   return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
 

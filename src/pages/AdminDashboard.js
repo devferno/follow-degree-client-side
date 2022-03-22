@@ -3,16 +3,21 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
-
+  const [filtered, setFiltered] = useState([]);
   const navigate = useNavigate();
   const [value, setValue] = useState();
   useEffect(() => {
     const config = {
-      headers: { authorization: `Bearer ${localStorage.getItem("access")}` },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("access-admin")}`,
+      },
     };
     axios
       .get("/admin/users/", config)
-      .then((res) => setUsers(res.data))
+      .then((res) => {
+        setUsers(res.data);
+        setFiltered(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
   const update = (id) => navigate(`/admin/update/${id}`);
@@ -22,8 +27,10 @@ const AdminDashboard = () => {
   };
   const search = (e) => {
     e.preventDefault();
-    const filteredUsers = users.filter((user) => user.cne.includes(value));
-    setUsers(filteredUsers);
+    const filteredUsers = users.filter((user) =>
+      user.cne.toLowerCase().includes(value.toLowerCase())
+    );
+    setFiltered(filteredUsers);
   };
   return (
     <div className="container">
@@ -45,7 +52,7 @@ const AdminDashboard = () => {
           <th></th>
         </thead>
         <tbody>
-          {users.map((user, index) => (
+          {filtered.map((user, index) => (
             <tr>
               <td>{user.cne}</td>
               <td>{user.fullname}</td>

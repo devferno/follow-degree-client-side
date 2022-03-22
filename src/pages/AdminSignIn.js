@@ -12,7 +12,7 @@ const AdminSignIn = () => {
     axios
       .post("/admin/signin", user)
       .then((res) => {
-        localStorage.setItem("access", res.data.access);
+        localStorage.setItem("access-admin", res.data.access);
         navigate("/admin/dashboard");
       })
       .catch((err) => console.log(err));

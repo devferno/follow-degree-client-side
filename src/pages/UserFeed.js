@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const UserFeed = () => {
   const [user, setUser] = useState({});
+
   const config = {
     headers: { authorization: `Bearer ${localStorage.getItem("access")}` },
   };

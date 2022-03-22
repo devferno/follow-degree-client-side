@@ -8,7 +8,9 @@ const UpdateUser = () => {
   const [user, setUser] = useState({});
   const [state, setState] = useState({});
   const config = {
-    headers: { authorization: `Bearer ${localStorage.getItem("access")}` },
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("access-admin")}`,
+    },
   };
   useEffect(() => {
     axios.get(`/admin/users/${params.id}`, config).then((res) => {
